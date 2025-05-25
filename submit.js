@@ -24,7 +24,9 @@ function loadPins() {
         const div = document.createElement('div');
         div.className = 'pin';
         div.innerHTML = `
-          <iframe src="https://assets.pinterest.com/ext/embed.html?id=${pinId}" height="300" loading="lazy"></iframe>
+          <div class="embed-container">
+            <iframe src="https://assets.pinterest.com/ext/embed.html?id=${pinId}" loading="lazy"></iframe>
+          </div>
           <button class="delete-btn" onclick="deletePin('${pin.link}')">Delete</button>
         `;
         pinBox.appendChild(div);
@@ -43,3 +45,4 @@ function extractPinId(link) {
 }
 
 loadPins();
+

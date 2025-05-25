@@ -13,7 +13,11 @@ fetch(API_URL)
     pins.reverse().forEach(pin => {
       const div = document.createElement('div');
       div.className = 'pin';
-      div.innerHTML = `<iframe src="https://assets.pinterest.com/ext/embed.html?id=${extractPinId(pin.link)}" height="400" loading="lazy"></iframe>`;
+      div.innerHTML = `
+        <div class="embed-container">
+          <iframe src="https://assets.pinterest.com/ext/embed.html?id=${extractPinId(pin.link)}" loading="lazy"></iframe>
+        </div>
+      `;
       container.appendChild(div);
     });
   });

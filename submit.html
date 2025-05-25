@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Pinterest Pin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="banner.jpg" alt="Banner">
+    <h1>Submit a Pin</h1>
+  </header>
+
+  <main>
+    <form id="submit-form">
+      <input type="url" id="pinLink" placeholder="Paste Pinterest Link" required>
+      <button type="submit">Submit</button>
+    </form>
+
+    <section id="pin-list">
+      <h2>Submitted Pins</h2>
+      <div id="pins"></div>
+    </section>
+  </main>
+
+  <script src="submit.js"></script>
+</body>
+</html>

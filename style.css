@@ -1,11 +1,18 @@
+#pin-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
 .embed-container {
   position: relative;
-  padding-bottom: 120%;
+  padding-bottom: 150%; /* aspect ratio */
   height: 0;
   overflow: hidden;
-  max-width: 100%;
-  background: #eee;
-  margin-bottom: 10px;
+  background: #f0f0f0;
   border-radius: 8px;
 }
 

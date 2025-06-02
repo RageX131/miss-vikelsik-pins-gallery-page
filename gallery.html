@@ -1,113 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Miss Vikelsik's Pins Gallery</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fefefe;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background: #111;
-      padding: 10px;
-      text-align: center;
-    }
-
-    header img {
-      max-width: 200px;
-      height: auto;
-    }
-
-    h1 {
-      color: #fff;
-      margin: 10px 0;
-    }
-
-    .gallery-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 10px;
-    }
-
-    .pin-container {
-      width: 100%;
-      max-width: 100%;
-      position: relative;
-      padding-bottom: 140px;
-      height: 0;
-    }
-
-    .pin-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .fallback {
-      padding: 15px;
-      background: #ffe5e5;
-      color: #c00;
-      border: 1px solid #c00;
-      text-align: center;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <img src="SaveTwitter.Net_GqxYOslW4AA4hhp.jpg" alt="Miss Vikelsik">
-  <h1>Miss Vikelsik's Pinterest Pins</h1>
-</header>
-
-<div class="gallery-container" id="gallery"></div>
+<div id="gallery"></div>
 
 <script>
-  const sheetURL = 'https://script.google.com/macros/s/AKfycbysDO4Td64KxTinbrO4FnSMlrYVZzkHBoX0IgJcz4-UDHrCjC0OlKs1Fzzj42Z4SOgRmg/exec';
+const pins = [
+  "https://www.pinterest.com/pin/908038343626799012/",
+  "https://www.pinterest.com/pin/993607355001677349/",
+  // আরো লিংক
+];
 
-  async function loadPins() {
-    try {
-      const res = await fetch(sheetURL);
-      const data = await res.json();
-      const container = document.getElementById('gallery');
-      container.innerHTML = '';
+function renderPins() {
+  const gallery = document.getElementById('gallery');
+  pins.forEach(pin => {
+    const a = document.createElement('a');
+    a.setAttribute('data-pin-do', 'embedPin');
+    a.href = pin;
+    gallery.appendChild(a);
+  });
 
-      data.reverse().forEach(pin => {
-        const pinUrl = pin.link;
-        const embedUrl = pinUrl.replace(/\/$/, '') + '/embed';
-
-        const wrapper = document.createElement('div');
-        wrapper.className = 'pin-container';
-
-        const iframe = document.createElement('iframe');
-        iframe.src = embedUrl;
-
-        iframe.onerror = () => {
-          wrapper.innerHTML = `<div class="fallback">⚠️ Failed to load this pin. It may have been removed or is unavailable.</div>`;
-        };
-
-        wrapper.appendChild(iframe);
-        container.appendChild(wrapper);
-      });
-    } catch (err) {
-      document.getElementById('gallery').innerHTML = '<p class="fallback">⚠️ Could not load pins. Please try again later.</p>';
-    }
+  if (window.PinUtils) {
+    PinUtils.build(); // important!
   }
+}
 
-  loadPins();
+renderPins();
 </script>
-
-</body>
-</html>
+<script async defer src="https://assets.pinterest.com/js/pinit.js"></script>
